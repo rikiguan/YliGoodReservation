@@ -2,7 +2,7 @@
  * Main entry point for CAPTCHA solver functionality
  */
 import { monitorCaptcha } from './interceptor';
-import { addStatusIndicator } from './uiIndicator';
+import { addStatusIndicator } from './indicator';
 
 export function initCaptchaSolver(): void {
   console.log('CAPTCHA Auto Solver loaded');
@@ -17,5 +17,5 @@ export function initCaptchaSolver(): void {
 // Export all the useful components
 export * from './solver';
 export * from './simulator';
-export * from './uiIndicator';
+export * from './indicator';
 export * from './interceptor';

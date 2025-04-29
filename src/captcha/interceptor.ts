@@ -4,7 +4,7 @@
 import { CaptchaResponse } from './types';
 import { CaptchaSolver } from './solver';
 import { simulateHumanLikeSliderMovement } from './simulator';
-import { updateSolverStatus } from './uiIndicator';
+import { updateSolverStatus } from './indicator';
 
 export function monitorCaptcha(): void {
   // Store the original XHR open method
