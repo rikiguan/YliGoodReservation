@@ -2,6 +2,10 @@
  * DOM utilities for element selection
  */
 
+
+/**
+ * 场地选择页面
+ */
 interface ArrowButtons {
   right: HTMLElement | null;
   left: HTMLElement | null;
@@ -45,28 +49,6 @@ export function getAppointmentButton(): HTMLElement | null {
   return null;
 }
 
-// 获取"提交订单"按钮
-export function getSubmitAppointmentButton(): HTMLElement | null {
-    const elements = document.querySelectorAll('div.payHandleItem');
-    for (const element of elements) {
-      if (element.textContent?.trim() === '提交订单') {
-        return element as HTMLElement;
-      }
-    }
-    return null;
-}
-
-// 获取"支付"按钮
-export function getPayButton(): HTMLButtonElement | null {
-  const buttons = document.querySelectorAll('button.ivu-btn.ivu-btn-primary');
-  for (const button of buttons) {
-    if (button.textContent?.trim() === '支付') {
-      return button as HTMLButtonElement;
-    }
-  }
-  return null;
-}
-
 // 根据标签文本获取复选框
 export function getCheckboxByLabelText(text: string): HTMLInputElement | null {
   const labels = document.querySelectorAll('.ivu-checkbox-wrapper');
@@ -82,3 +64,35 @@ export function getCheckboxByLabelText(text: string): HTMLInputElement | null {
 export function getAgreementCheckbox(): HTMLInputElement | null {
   return getCheckboxByLabelText('已阅读并同意');
 }
+
+
+/**
+ * 订单确认页面
+ */
+
+// 获取"提交订单"按钮
+export function getSubmitAppointmentButton(): HTMLElement | null {
+    const elements = document.querySelectorAll('div.payHandleItem');
+    for (const element of elements) {
+      if (element.textContent?.trim() === '提交订单') {
+        return element as HTMLElement;
+      }
+    }
+    return null;
+}
+
+/**
+ * 订单支付页面
+ */
+
+// 获取"支付"按钮
+export function getPayButton(): HTMLButtonElement | null {
+  const buttons = document.querySelectorAll('button.ivu-btn.ivu-btn-primary');
+  for (const button of buttons) {
+    if (button.textContent?.trim() === '支付') {
+      return button as HTMLButtonElement;
+    }
+  }
+  return null;
+}
+

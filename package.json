@@ -1,13 +1,16 @@
 {
-  "name": "venue-scanner",
+  "name": "YliGoodReservation",
   "version": "0.1.0",
-  "description": "Script to scan and find available time slots",
+  "description": "a scripts help u reserve a place",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch"
   },
   "devDependencies": {
+    "css-loader": "^6.8.1",
+    "html-loader": "^4.2.0",
+    "style-loader": "^3.3.3",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
     "webpack": "^5.84.1",

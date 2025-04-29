@@ -13,6 +13,14 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.html$/,
+        use: 'html-loader'
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -22,12 +30,12 @@ module.exports = {
   plugins: [
     new UserscriptPlugin({
       headers: {
-        name: '打印空闲场地时间段',
+        name: 'YliGoodReservation',
         namespace: 'http://tampermonkey.net/',
         version: '0.1',
-        description: '打印一天内所有空闲场地的时间段',
-        author: 'Copilot',
-        match: '*://*/*',
+        description: 'help u get a place 2 play',
+        author: 'riki',
+        match: '*://ggtypt.nju.edu.cn/*',
         grant: 'none'
       },
       proxyScript: {
