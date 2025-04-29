@@ -3,6 +3,7 @@
  */
 import { scanAllPages, startAutoScan, stopAutoScan, isAutoScanActive } from '../scanner/autoScan';
 import { setPreferredTimeSlots, getPreferredTimeSlots } from '../scanner/timeSlots';
+import { initDragFunctionality } from './components/dragHandler';
 import controlPanelHTML from './components/controlPanel.html';
 import './styles/controlPanel.css'; // 需要额外配置webpack处理CSS
 
@@ -11,6 +12,12 @@ export function addScanButton(): HTMLDivElement {
   const container = document.createElement('div');
   container.innerHTML = controlPanelHTML;
   document.body.appendChild(container);
+  
+  // 获取控制面板元素
+  const controlPanel = container.firstElementChild as HTMLDivElement;
+  
+  // 初始化拖拽功能
+  initDragFunctionality(controlPanel);
   
   // 获取UI元素
   const scanBtn = document.getElementById('yligood-scan-btn') as HTMLButtonElement;
@@ -42,5 +49,5 @@ export function addScanButton(): HTMLDivElement {
     setPreferredTimeSlots(slots);
   });
 
-  return container.firstElementChild as HTMLDivElement;
+  return controlPanel;
 }

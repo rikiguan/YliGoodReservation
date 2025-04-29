@@ -12,6 +12,7 @@
   padding: 12px;
   width: 250px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  user-select: none; /* Prevent text selection while dragging */
 }
 
 .yligood-header {
@@ -20,6 +21,14 @@
   margin-bottom: 8px;
   color: #333;
   text-align: center;
+  cursor: move; /* Indicate the header can be used to drag */
+  padding: 2px 0;
+}
+
+/* Add style for when dragging is active */
+.yligood-dragging {
+  opacity: 0.9;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .yligood-button {
