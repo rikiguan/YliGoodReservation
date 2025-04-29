@@ -58,12 +58,21 @@ export function collectAvailableSlots(onPreferredSlotFound?: PreferredSlotCallba
           console.log(`找到首选时间段的空闲场地: ${place} ${timeSlot}`);
           foundPreferredSlot = true;
           
-          // 点击对应的单元格
-          cell.click();
-          
+          console.log(cell);
+          // 获取 cell 中的预约 div 并点击
+          const reserveDiv = cell.querySelector('.reserveBlock.position.free');
+          if (reserveDiv) {
+            (reserveDiv as HTMLElement).click();
+            console.log('点击了首选时间段的预约块');
+          } else {
+            cell.click();
+            console.log('未找到预约块，点击了单元格');
+          }
+          console.log('点击元素:', reserveDiv || cell);
           if (typeof onPreferredSlotFound === 'function') {
             onPreferredSlotFound();
           }
+          return result; // 找到首选时间段后立即返回
         }
       }
     }

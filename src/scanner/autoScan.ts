@@ -1,7 +1,7 @@
 /**
  * 自动扫描页面功能
  */
-import { getArrowBtns, getActionButtons } from '../utils/domUtils';
+import { getArrowBtns, getActionButtons ,getAgreementCheckbox,getAppointmentButton,getSubmitAppointmentButton } from '../utils/domUtils';
 import { collectAvailableSlots, printResults, addAvailableSlots, resetScanState, hasFoundPreferredSlot } from './tableParser';
 
 let autoScanInterval: number | null = null;
@@ -19,7 +19,7 @@ export function scanAllPages(): void {
     }
     
     // 收集当前页数据
-    const currentSlots = collectAvailableSlots(stopAutoScan);
+    const currentSlots = collectAvailableSlots(nextStepAppointment);
     addAvailableSlots(currentSlots);
     
     // 如果找到了首选时间段，停止扫描
@@ -70,6 +70,34 @@ export function startAutoScan(interval: number = 5000): boolean {
   
   return true;
 }
+
+
+//下一步预约操作
+export function nextStepAppointment(): void {
+  stopAutoScan(); // 停止自动扫描
+  
+  const agreementCheckbox = getAgreementCheckbox();
+  if (agreementCheckbox) {
+    agreementCheckbox.click(); // 点击协议复选框
+  }
+  const appointmentButton = getAppointmentButton();
+  if (appointmentButton) {
+    appointmentButton.click(); // 点击预约按钮
+  } else {
+    console.log('未找到预约按钮，可能是页面结构变化或按钮不可见');
+  }
+  //等待网页加载完毕延迟
+  setTimeout(() => {
+    const submitButton = getSubmitAppointmentButton();
+    if (submitButton) {
+      submitButton.click(); // 点击提交预约按钮
+    } else {
+      console.log('未找到提交预约按钮，可能是页面结构变化或按钮不可见');
+    }
+  }, 1000); // 延迟1秒等待页面加载
+
+}
+
 
 export function stopAutoScan(): boolean {
   if (autoScanInterval) {

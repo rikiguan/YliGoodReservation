@@ -1,7 +1,7 @@
 /**
  * Mouse movement simulation for CAPTCHA solving
  */
-import { updateSolverStatus } from './uiindicator';
+import { updateSolverStatus } from './uiIndicator';
 
 // Simulate human-like slider movement with delays
 export function simulateHumanLikeSliderMovement(position: number): void {

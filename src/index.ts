@@ -3,7 +3,7 @@
  */
 import { addScanButton } from './ui/buttons';
 import { initCaptchaSolver } from './captcha';
-
+import { initPayOrder } from './payer/payOrder'; 
 // 初始化
 function init(): void {
   addScanButton();
@@ -11,6 +11,7 @@ function init(): void {
   // 初始化CAPTCHA解决器
   initCaptchaSolver();
   
+  initPayOrder(); // 立即支付订单
   // 自动扫描 (可选)
   // setTimeout(scanAllPages, 1500);
 }
