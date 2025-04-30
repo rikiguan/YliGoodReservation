@@ -16,6 +16,11 @@ interface ActionButtons {
   refresh: HTMLButtonElement | null;
 }
 
+// 获取所有空闲的预约区块
+export function getFreeReservationBlocks(): NodeListOf<HTMLElement> {
+  return document.querySelectorAll('div.reserveBlock.position.free[data-v-d61a26c0]');
+}
+
 // 获取表格元素
 export function getTable(): HTMLTableElement | null {
   return document.querySelector('#scrollTable table');

@@ -93,6 +93,12 @@ export function nextStepAppointment(list:Element[]): void {
 
   stopAutoScan(); // 停止自动扫描
   
+  confirmAppointment(); // 确认预约
+
+}
+
+export function confirmAppointment(): void {
+  
   const agreementCheckbox = getAgreementCheckbox();
   if (agreementCheckbox) {
     agreementCheckbox.click(); // 点击协议复选框
@@ -122,9 +128,7 @@ export function nextStepAppointment(list:Element[]): void {
       console.log('未找到提交预约按钮，可能是页面结构变化或按钮不可见');
     }
   }, 100); // 延迟1秒等待页面加载
-
 }
-
 
 export function stopAutoScan(): boolean {
   if (autoScanIntervalId) {
