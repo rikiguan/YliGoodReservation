@@ -6,6 +6,13 @@ import { setPreferredTimeSlots, getPreferredTimeSlots } from '../scanner/timeSlo
 import { initDragFunctionality } from './components/dragHandler';
 import controlPanelHTML from './components/controlPanel.html';
 import './styles/controlPanel.css'; // 需要额外配置webpack处理CSS
+import lunyuData from './components/lunyu.json';
+
+// Interface for Lunyu data structure
+interface LunyuChapter {
+  chapter: string;
+  paragraphs: string[];
+}
 
 export function addScanButton(): HTMLDivElement {
   // 创建容器并注入HTML
@@ -58,5 +65,43 @@ export function addScanButton(): HTMLDivElement {
     setPreferredTimeSlots(slots);
   });
 
+  // 初始化论语显示
+  initLunyuQuote();
+
   return controlPanel;
+}
+
+/**
+ * 初始化论语显示功能
+ */
+function initLunyuQuote(): void {
+  // 首次显示论语
+  displayRandomLunyuQuote();
+  
+  // 每60秒更新一次论语
+  setInterval(displayRandomLunyuQuote, 60000);
+}
+
+/**
+ * 显示随机论语
+ */
+function displayRandomLunyuQuote(): void {
+  const quoteElement = document.getElementById('yligood-lunyu-quote');
+  const sourceElement = document.getElementById('yligood-lunyu-source');
+  
+  if (!quoteElement || !sourceElement) return;
+  
+  const lunyuChapters = lunyuData as LunyuChapter[];
+  
+  // 随机选择章节
+  const randomChapterIndex = Math.floor(Math.random() * lunyuChapters.length);
+  const chapter = lunyuChapters[randomChapterIndex];
+  
+  // 随机选择段落
+  const randomParagraphIndex = Math.floor(Math.random() * chapter.paragraphs.length);
+  const quote = chapter.paragraphs[randomParagraphIndex];
+  
+  // 更新显示
+  quoteElement.textContent = quote;
+  sourceElement.textContent = `—— 《论语·${chapter.chapter}》`;
 }
