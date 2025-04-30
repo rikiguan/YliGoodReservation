@@ -93,15 +93,21 @@ function displayRandomLunyuQuote(): void {
   
   const lunyuChapters = lunyuData as LunyuChapter[];
   
-  // 随机选择章节
-  const randomChapterIndex = Math.floor(Math.random() * lunyuChapters.length);
-  const chapter = lunyuChapters[randomChapterIndex];
+
   
-  // 随机选择段落
-  const randomParagraphIndex = Math.floor(Math.random() * chapter.paragraphs.length);
-  const quote = chapter.paragraphs[randomParagraphIndex];
-  
+  var quote = '' as string;
+  var chapter: LunyuChapter | null = null;
+  while(quote == '' || quote.length > 50) {
+    // 随机选择章节
+    const randomChapterIndex = Math.floor(Math.random() * lunyuChapters.length);
+    chapter = lunyuChapters[randomChapterIndex];
+    // 随机选择段落
+    const randomParagraphIndex = Math.floor(Math.random() * chapter.paragraphs.length);
+    quote = chapter.paragraphs[randomParagraphIndex];
+  }
   // 更新显示
   quoteElement.textContent = quote;
-  sourceElement.textContent = `—— 《论语·${chapter.chapter}》`;
+  if(chapter) {
+    sourceElement.textContent = `—— 《论语·${chapter.chapter}》`;
+  }
 }
