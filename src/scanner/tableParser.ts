@@ -9,7 +9,7 @@ let allAvailableSlots: Set<string> = new Set();
 let visitedTables: Set<string> = new Set(); // 用于记录已访问过的表格内容，防止死循环
 let foundPreferredSlot: boolean = false;
 
-type PreferredSlotCallback = () => void;
+type PreferredSlotCallback = (list : Element[]) => void;
 
 // 解析表格，收集空闲时间段
 export function collectAvailableSlots(onPreferredSlotFound?: PreferredSlotCallback): string[] {
@@ -36,6 +36,7 @@ export function collectAvailableSlots(onPreferredSlotFound?: PreferredSlotCallba
 
   // 遍历每一行，查找空闲
   let result: string[] = [];
+  let preferResult: Element[] = [];
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
     if (row.classList.contains('mobileStyle')) continue; // 跳过表头行
@@ -62,21 +63,17 @@ export function collectAvailableSlots(onPreferredSlotFound?: PreferredSlotCallba
           // 获取 cell 中的预约 div 并点击
           const reserveDiv = cell.querySelector('.reserveBlock.position.free');
           if (reserveDiv) {
-            (reserveDiv as HTMLElement).click();
-            console.log('点击了首选时间段的预约块');
-          } else {
-            cell.click();
-            console.log('未找到预约块，点击了单元格');
+            preferResult.push(reserveDiv);
           }
-          console.log('点击元素:', reserveDiv || cell);
-          if (typeof onPreferredSlotFound === 'function') {
-            onPreferredSlotFound();
-          }
-          return result; // 找到首选时间段后立即返回
+
         }
       }
     }
   }
+  if (foundPreferredSlot && typeof onPreferredSlotFound === 'function') {
+    onPreferredSlotFound(preferResult);
+  }
+  
   return result;
 }
 

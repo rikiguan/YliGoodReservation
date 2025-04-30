@@ -6,8 +6,7 @@ export function initPayOrder(): void {
 }
 
 function startScanningForPayButton(): void {
-  console.log('开始无限扫描支付按钮...');
-  
+
   let scanAttempts = 0;
   const scanInterval = 500; // 每500ms扫描一次
   

@@ -70,6 +70,43 @@ export function getAgreementCheckbox(): HTMLInputElement | null {
  * 订单确认页面
  */
 
+
+// 获取"添加同伴"链接
+export function getAddCompanionLink(): HTMLAnchorElement | null {
+  // 查找包含"点击这里"和"添加同伴"文本的容器
+  const containers = document.querySelectorAll('.ivu-form-item-content');
+  for (const container of containers) {
+    if (container.textContent?.includes('添加同伴')) {
+      // 从容器中找到链接元素
+      return container.querySelector('a[href="/venue/venues/buddies"]') as HTMLAnchorElement;
+    }
+  }
+  return null;
+}
+
+// 获取同伴复选框
+export function getCompanionCheckboxList(): NodeListOf<HTMLInputElement> | null {
+  // 找到包含"添加同伴"文本的容器
+  const container = document.querySelector('.ivu-form-item-content');
+  if (container?.textContent?.includes('添加同伴')) {
+    // 从容器中找到第一个复选框
+    return container.querySelectorAll('.ivu-checkbox-input') as NodeListOf<HTMLInputElement>;
+  }
+  return null;
+}
+
+// 根据同伴名字获取对应的复选框
+export function getCompanionCheckboxByName(name: string): HTMLInputElement | null {
+  const labels = document.querySelectorAll('.ivu-checkbox-wrapper');
+  for (const label of labels) {
+    if (label.textContent?.trim().includes(name)) {
+      return label.querySelector('.ivu-checkbox-input') as HTMLInputElement;
+    }
+  }
+  return null;
+}
+
+
 // 获取"提交订单"按钮
 export function getSubmitAppointmentButton(): HTMLElement | null {
     const elements = document.querySelectorAll('div.payHandleItem');
@@ -95,4 +132,5 @@ export function getPayButton(): HTMLButtonElement | null {
   }
   return null;
 }
+
 

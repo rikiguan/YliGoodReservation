@@ -23,16 +23,25 @@ export function addScanButton(): HTMLDivElement {
   const scanBtn = document.getElementById('yligood-scan-btn') as HTMLButtonElement;
   const autoScanBtn = document.getElementById('yligood-auto-scan-btn') as HTMLButtonElement;
   const preferredTimesInput = document.getElementById('yligood-preferred-times') as HTMLInputElement;
+  const scanIntervalSlider = document.getElementById('yligood-scan-interval') as HTMLInputElement;
+  const intervalValueDisplay = document.getElementById('yligood-interval-value') as HTMLSpanElement;
   
   // 设置初始值
   preferredTimesInput.value = getPreferredTimeSlots().join(',');
+  intervalValueDisplay.textContent = scanIntervalSlider.value;
+  
+  // 滑块事件监听，更新显示的值
+  scanIntervalSlider.addEventListener('input', () => {
+    intervalValueDisplay.textContent = scanIntervalSlider.value;
+  });
   
   // 添加事件监听
   scanBtn.addEventListener('click', scanAllPages);
   
   autoScanBtn.addEventListener('click', () => {
     if (!isAutoScanActive()) {
-      if (startAutoScan()) {
+      // 传递扫描间隔（将文本值转为数字）
+      if (startAutoScan(parseInt(scanIntervalSlider.value, 10))) {
         autoScanBtn.textContent = '停止定时扫描';
         autoScanBtn.classList.replace('info', 'danger');
       }
