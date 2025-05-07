@@ -138,4 +138,54 @@ export function getPayButton(): HTMLButtonElement | null {
   return null;
 }
 
+// 获取订单号
+export function getOrderNumber(): string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '订单号') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}
 
+// 获取订场信息
+export function getOrderPlace(): string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '订场信息') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}
+
+// 获取使用者
+export function getOrderUser(): string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '场地使用者') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}
+
+// 获取同伴信息
+export function getOrderPartner() : string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '同伴信息') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}
