@@ -4,7 +4,7 @@ export function initPayOrder(): void {
   console.log('PayOrder loaded');
   startScanningForPayButton();
 }
-
+//FIXME payOrder只能预约一次 
 function startScanningForPayButton(): void {
 
   let scanAttempts = 0;
