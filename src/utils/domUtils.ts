@@ -139,3 +139,19 @@ export function getPayButton(): HTMLButtonElement | null {
 }
 
 
+/**
+ * 个人信息相关
+ */
+
+// 获取用户名称
+export function getUserName(): string | null {
+  const loginContent = document.querySelector('.isLoginContent');
+  if (!loginContent) return null;
+  
+  // 查找包含用户名的div（带有特定margin样式的div）
+  const nameDiv = loginContent.querySelector('div[style*="margin: 0px 10px"]');
+  return nameDiv ? nameDiv.textContent?.trim() ?? null : null;
+}
+
+
+
