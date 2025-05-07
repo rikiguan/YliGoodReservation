@@ -124,6 +124,21 @@ export function getSubmitAppointmentButton(): HTMLElement | null {
 }
 
 /**
+ * 个人信息相关
+ */
+
+// 获取用户名称
+export function getUserName(): string | null {
+  const loginContent = document.querySelector('.isLoginContent');
+  if (!loginContent) return null;
+  
+  // 查找包含用户名的div（带有特定margin样式的div）
+  const nameDiv = loginContent.querySelector('div[style*="margin: 0px 10px"]');
+  return nameDiv ? nameDiv.textContent?.trim() ?? null : null;
+}
+
+
+/**
  * 订单支付页面
  */
 
@@ -139,19 +154,54 @@ export function getPayButton(): HTMLButtonElement | null {
 }
 
 
-/**
- * 个人信息相关
- */
-
-// 获取用户名称
-export function getUserName(): string | null {
-  const loginContent = document.querySelector('.isLoginContent');
-  if (!loginContent) return null;
-  
-  // 查找包含用户名的div（带有特定margin样式的div）
-  const nameDiv = loginContent.querySelector('div[style*="margin: 0px 10px"]');
-  return nameDiv ? nameDiv.textContent?.trim() ?? null : null;
+// 获取订单号
+export function getOrderNumber(): string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '订单号') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
 }
 
+// 获取订场信息
+export function getOrderPlace(): string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '订场信息') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}
 
+// 获取使用者
+export function getOrderUser(): string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '场地使用者') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}
 
+// 获取同伴信息
+export function getOrderPartner() : string | null {
+  const orderItems = document.querySelectorAll('div.payDetailItem');
+  for (const item of orderItems) {
+    const label = item.querySelector('.payLable');
+    if (label?.textContent?.trim() === '同伴信息') {
+      const orderNumberElement = item.querySelector('.payText');
+      return orderNumberElement?.textContent?.trim() || null;
+    }
+  }
+  return null;
+}

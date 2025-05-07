@@ -16,6 +16,9 @@ interface LunyuChapter {
 }
 
 let autoClickActive = false;
+// 定义按钮类型，用于互斥操作
+type ButtonType = 'scan' | 'autoScan' | 'autoClick' | 'none';
+let activeButton: ButtonType = 'none';
 
 export function addScanButton(): HTMLDivElement {
   // 创建容器并注入HTML
@@ -47,30 +50,48 @@ export function addScanButton(): HTMLDivElement {
   });
   
   // 添加事件监听
-  scanBtn.addEventListener('click', scanAllPages);
+  scanBtn.addEventListener('click', () => {
+    if (activeButton !== 'scan') {
+      resetAllButtons(scanBtn, autoScanBtn, autoClickBtn);
+      // 一次性扫描不需要持续激活状态，执行后自动恢复所有按钮
+      scanAllPages();
+    }
+  });
   
   autoScanBtn.addEventListener('click', () => {
-    if (!isAutoScanActive()) {
+    if (activeButton !== 'autoScan') {
+      // 激活自动扫描
+      resetAllButtons(scanBtn, autoScanBtn, autoClickBtn);
       // 传递扫描间隔（将文本值转为数字）
       if (startAutoScan(parseInt(scanIntervalSlider.value, 10))) {
         autoScanBtn.textContent = '停止定时扫描';
         autoScanBtn.classList.replace('info', 'danger');
+        activeButton = 'autoScan';
       }
     } else {
+      // 停止自动扫描
       if (stopAutoScan()) {
         autoScanBtn.textContent = '开始定时扫描';
         autoScanBtn.classList.replace('danger', 'info');
+        activeButton = 'none';
       }
     }
   });
   
   // 添加自动点击监听按钮事件
   autoClickBtn.addEventListener('click', () => {
-    toggleAutoClickListener(autoClickBtn);
+    if (activeButton !== 'autoClick') {
+      resetAllButtons(scanBtn, autoScanBtn, autoClickBtn);
+      setAutoClickActive(true, autoClickBtn);
+    } else {
+      setAutoClickActive(false, autoClickBtn);
+    }
   });
-  toggleAutoClickListener(autoClickBtn); // 初始化时设置为自动点击状态
-  
 
+  // 初始化时默认设置为自动点击状态
+  resetAllButtons(scanBtn, autoScanBtn, autoClickBtn);
+  setAutoClickActive(true, autoClickBtn);
+  
   preferredTimesInput.addEventListener('change', () => {
     const slots = preferredTimesInput.value.split(',').map(t => t.trim()).filter(t => t);
     setPreferredTimeSlots(slots);
@@ -83,26 +104,42 @@ export function addScanButton(): HTMLDivElement {
 }
 
 /**
- * 切换自动点击监听状态
+ * 重置所有按钮状态
  */
-function toggleAutoClickListener(button: HTMLButtonElement): void {
-  autoClickActive = !autoClickActive;
+function resetAllButtons(scanBtn: HTMLButtonElement, autoScanBtn: HTMLButtonElement, autoClickBtn: HTMLButtonElement): void {
+  // 停止自动扫描（如果正在进行）
+  if (isAutoScanActive()) {
+    stopAutoScan();
+    autoScanBtn.textContent = '开始定时扫描';
+    autoScanBtn.classList.replace('danger', 'info');
+  }
+  
+  // 停止自动点击（如果正在进行）
   if (autoClickActive) {
-    // 激活自动点击功能
+    setAutoClickActive(false, autoClickBtn);
+  }
+  
+  // 重置活跃按钮状态
+  activeButton = 'none';
+}
+
+/**
+ * 设置自动点击状态
+ */
+function setAutoClickActive(active: boolean, button: HTMLButtonElement): void {
+  autoClickActive = active;
+  if (active) {
     button.textContent = '关闭自动点击';
     button.classList.replace('info', 'danger');
-    
-    // 添加事件委托到document，监听所有空闲预约区块的点击
     document.addEventListener('click', handleReservationBlockClick);
     console.log('已启用自动点击预约模式');
+    activeButton = 'autoClick';
   } else {
-    // 停用自动点击功能
     button.textContent = '开启自动点击';
     button.classList.replace('danger', 'info');
-    
-    // 移除事件监听
     document.removeEventListener('click', handleReservationBlockClick);
     console.log('已停用自动点击预约模式');
+    activeButton = 'none';
   }
 }
 

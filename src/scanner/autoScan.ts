@@ -6,7 +6,7 @@ import { collectAvailableSlots, printResults, addAvailableSlots, resetScanState,
 
 let autoScanIntervalId: number | null = null;
 let scanIntervalSeconds = 5; // 默认5秒
-
+//TODO 把延时文件单独成一个文件
 // 修改startAutoScan函数接收间隔参数
 export function startAutoScan(intervalSeconds?: number): boolean {
   if (autoScanIntervalId !== null) {
