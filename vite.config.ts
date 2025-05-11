@@ -25,8 +25,8 @@ export default defineConfig({
           '@element-plus/icons-vue': cdn.jsdelivr('ElementPlusIconsVue', 'dist/index.min.js'),
           'pinia': cdn.jsdelivr('Pinia', 'dist/pinia.iife.min.js')
         },
-        cssExternalGlobals: {
-          'element-plus': cdn.jsdelivr('ElementPlus', 'dist/index.css')
+        externalResource: {
+          'element-plus/dist/index.css': cdn.jsdelivr('ElementPlus', 'dist/index.css')
         }
       }
     })

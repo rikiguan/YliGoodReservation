@@ -1,36 +1,38 @@
 <template>
   <el-card class="success-notification">
-    <template #header>
-      <div class="notification-header">预约成功</div>
-    </template>
-    
-    <div class="order-details">
-      <div class="detail-row">
-        <span class="label">订单号:</span>
-        <span class="value">{{ uiStore.orderDetails.orderNumber }}</span>
+    <el-watermark :content="['YliGood预约助手', '点个Satr吧~']" :gap="[100, 0]">
+      <template #header>
+        <div class="notification-header">预约成功</div>
+      </template>
+
+      <div class="order-details">
+        <div class="detail-row">
+          <span class="label">订单号:</span>
+          <span class="value">{{ uiStore.orderDetails.orderNumber }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">订场信息:</span>
+          <span class="value">{{ uiStore.orderDetails.orderPlace }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">场地使用者:</span>
+          <span class="value">{{ uiStore.orderDetails.orderUser }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">同伴信息:</span>
+          <span class="value">{{ uiStore.orderDetails.orderPartner }}</span>
+        </div>
       </div>
-      
-      <div class="detail-row">
-        <span class="label">订场信息:</span>
-        <span class="value">{{ uiStore.orderDetails.orderPlace }}</span>
-      </div>
-      
-      <div class="detail-row">
-        <span class="label">场地使用者:</span>
-        <span class="value">{{ uiStore.orderDetails.orderUser }}</span>
-      </div>
-      
-      <div class="detail-row">
-        <span class="label">同伴信息:</span>
-        <span class="value">{{ uiStore.orderDetails.orderPartner }}</span>
-      </div>
-    </div>
-    
-    <div class="notification-note">预约已成功提交，请按时到场使用</div>
-    
-    <el-button type="primary" @click="hideNotification" class="close-btn">
-      关闭提示
-    </el-button>
+
+      <div class="notification-note">预约已成功提交，请按时到场使用</div>
+
+      <el-button type="primary" @click="hideNotification" class="close-btn">
+        关闭提示
+      </el-button>
+    </el-watermark>
   </el-card>
 </template>
 
