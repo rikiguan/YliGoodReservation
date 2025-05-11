@@ -5,17 +5,12 @@ const processedOrderIds = new Set<string>();
 
 export function initPayOrder(): void {
   console.log('PayOrder loaded');
-  startScanningForPayButton();
+  startWatchingForPayButton();
 }
 
-function startScanningForPayButton(): void {
-  let scanAttempts = 0;
-  const scanInterval = 500; // 每500ms扫描一次
-  
-  const intervalId = setInterval(() => {
-    scanAttempts++;
-    // console.log(`正在扫描支付按钮... 第${scanAttempts}次`);
-    
+function startWatchingForPayButton(): void {
+  // 创建观察器实例
+  const observer = new MutationObserver((mutations) => {
     const payButton = getPayButton();
     if (payButton) {
       // 获取当前订单ID
@@ -37,16 +32,25 @@ function startScanningForPayButton(): void {
       } else {
         console.log('找到支付按钮但无法获取订单ID，跳过处理');
       }
-      
-      // 注意：我们不再调用clearInterval，继续扫描以处理新订单
     }
-  }, scanInterval);
+  });
   
-  // 添加一个全局变量来允许在需要时手动停止扫描
-  (window as any).__stopPaymentScanning = () => {//HACK
-    clearInterval(intervalId);
-    console.log('支付扫描已手动停止');
+  // 配置观察选项
+  const config = { 
+    childList: true,     // 观察目标子节点的变化
+    subtree: true,       // 观察所有后代节点
+    attributes: true     // 观察属性变化
   };
+  
+  // 开始观察整个文档
+  observer.observe(document.body, config);
+  
+  // 添加一个全局变量来允许在需要时手动停止观察
+  (window as any).__stopPaymentWatching = () => {//HACK
+    observer.disconnect();
+    console.log('支付观察已手动停止');
+  };
+  
   (window as any).__showSuccessNotification = () => {//HACK
     showSuccessNotification();
     console.log('支付扫描已手动停止');
@@ -60,7 +64,6 @@ function startScanningForPayButton(): void {
 }
 
 function showSuccessNotification(): void {
-
   console.log('显示预约成功提示');
   checkOrderAndShowNotification();
 }

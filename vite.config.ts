@@ -21,14 +21,14 @@ export default defineConfig({
       build: {
         externalGlobals: {
           vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
-          'element-plus': [
-            'https://cdn.jsdelivr.net/npm/element-plus/dist/index.full.min.js',
-            () => 'https://cdn.jsdelivr.net/npm/element-plus/dist/index.css'
-          ],
+          'element-plus': cdn.jsdelivr('ElementPlus', 'dist/index.full.min.js'),
           '@element-plus/icons-vue': cdn.jsdelivr('ElementPlusIconsVue', 'dist/index.min.js'),
-          pinia: cdn.jsdelivr('Pinia', 'dist/pinia.iife.min.js'),
+          'pinia': cdn.jsdelivr('Pinia', 'dist/pinia.iife.min.js')
+        },
+        cssExternalGlobals: {
+          'element-plus': cdn.jsdelivr('ElementPlus', 'dist/index.css')
         }
-      }      
+      }
     })
   ],
   resolve: {

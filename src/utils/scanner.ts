@@ -1,6 +1,6 @@
 import { useReservationStore } from '@/stores/reservation';
 import { useUIStore } from '@/stores/ui';
-import { getTable, getArrowBtns, getAgreementCheckbox, getAppointmentButton, getCompanionCheckboxList, getSubmitAppointmentButton, getOrderNumber, getOrderPlace, getOrderUser, getOrderPartner } from '@/utils/dom';
+import { getTable, getArrowBtns, getAgreementCheckbox, getAppointmentButton, getCompanionCheckboxList, getSubmitAppointmentButton, getOrderNumber, getOrderPlace, getOrderUser, getOrderPartner, getActionButtons } from '@/utils/dom';
 
 let autoScanIntervalId: number | null = null;
 
@@ -21,20 +21,34 @@ export function startAutoScan(intervalSeconds?: number): boolean {
   console.log(`启动自动扫描，间隔 ${reservationStore.scanIntervalSeconds} 秒`);
   
   // 立即执行一次扫描
-  scanAllPages();
+  autoScanAction(reservationStore);
   
   // 设置定时器进行后续扫描
   autoScanIntervalId = window.setInterval(() => {
-    // 如果已找到首选时间段，停止扫描
-    if (reservationStore.foundPreferredSlot) {
-      stopAutoScan();
-      return;
-    }
-    
-    scanAllPages();
+    autoScanAction(reservationStore);
   }, reservationStore.scanIntervalSeconds * 1000);
   
   return true;
+}
+
+function autoScanAction(reservationStore:ReturnType<typeof useReservationStore>): void {
+  
+  const actionSequence: string[] = ['forward', 'refresh'];
+
+  for(let i = 0; i < actionSequence.length; i++) {
+    const action = actionSequence[i];
+    const buttons = getActionButtons();
+    if (buttons[action as keyof typeof buttons] && buttons[action as keyof typeof buttons]?.offsetParent !== null) {
+      console.log(`自动点击: ${action}`);
+      buttons[action as keyof typeof buttons]?.click();
+    }
+  }
+  // 如果已找到首选时间段，停止扫描
+  if (reservationStore.foundPreferredSlot) {
+    stopAutoScan();
+    return;
+  }
+  setTimeout(scanAllPages, 800);
 }
 
 // 停止自动扫描
@@ -107,7 +121,7 @@ export function nextStepAppointment(list: Element[]): void {
   const reservationStore = useReservationStore();
   if (reservationStore.autoClickActive) {
     (randomElement as HTMLElement).click(); // 点击随机选择的预约块
-    stopAutoScan(); // 停止自动扫描
+    stopAutoScan(); // 停止自动扫描 二次确认
     setTimeout(confirmAppointment, 10);
   } else {
     console.log('自动点击已禁用，不执行自动预约');
