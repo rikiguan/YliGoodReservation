@@ -92,8 +92,8 @@ export function nextStepAppointment(list:Element[]): void {
 
 
   stopAutoScan(); // 停止自动扫描
-  
-  confirmAppointment(); // 确认预约
+  //延迟10ms
+  setTimeout(confirmAppointment, 10); 
 
 }
 
