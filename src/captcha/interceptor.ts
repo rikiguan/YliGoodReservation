@@ -1,7 +1,7 @@
 /**
  * XHR interception to detect and handle CAPTCHA challenges
  */
-import { CaptchaResponse } from './types';
+import type { CaptchaResponse } from './types';
 import { CaptchaSolver } from './solver';
 import { simulateHumanLikeSliderMovement } from './simulator';
 import { updateSolverStatus } from './indicator';

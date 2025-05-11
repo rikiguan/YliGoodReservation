@@ -1,7 +1,7 @@
 /**
  * Core CAPTCHA solving algorithm
  */
-import { ImageData, MaxLocation, SliceResult, ProcessedAlpha } from './types';
+import type { ImageData, MaxLocation, SliceResult, ProcessedAlpha } from './types';
 
 export class CaptchaSolver {
   static findPuzzlePosition(background: HTMLImageElement, puzzle: HTMLImageElement, visualize: boolean = false): number {

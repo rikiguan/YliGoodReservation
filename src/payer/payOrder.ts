@@ -1,7 +1,5 @@
-import {getPayButton, getOrderNumber, getOrderPlace, getOrderUser, getOrderPartner} from '../utils/domUtils';
-import successNotificationHTML from '../ui/components/successNotification.html';
-import '../ui/styles/notification.css'; // Import the CSS file for notifications
-
+import {getPayButton, getOrderNumber, getOrderPlace, getOrderUser, getOrderPartner} from '../utils/dom';
+import { checkOrderAndShowNotification } from "../utils/scanner";
 // 用于追踪已处理的订单ID
 const processedOrderIds = new Set<string>();
 
@@ -62,49 +60,7 @@ function startScanningForPayButton(): void {
 }
 
 function showSuccessNotification(): void {
-  try {
-    console.log('显示预约成功提示');
-    // 创建通知元素
-    const notificationWrapper = document.createElement('div');
-    notificationWrapper.className = 'yligood-notification-wrapper';
-    notificationWrapper.innerHTML = successNotificationHTML;
-    
-    document.body.appendChild(notificationWrapper);
-    console.log('通知元素已添加到DOM中');
-    
-    // 获取订单信息并填充
-    const orderNumber = getOrderNumber() || '未知';
-    const orderPlace = getOrderPlace() || '未知';
-    const orderUser = getOrderUser() || '未知';
-    const orderPartner = getOrderPartner() || '无';
-    
-    const orderNumberEl = notificationWrapper.querySelector('#yligood-order-number');
-    const orderPlaceEl = notificationWrapper.querySelector('#yligood-order-place');
-    const orderUserEl = notificationWrapper.querySelector('#yligood-order-user');
-    const orderPartnerEl = notificationWrapper.querySelector('#yligood-order-partner');
-    
-    if (orderNumberEl) orderNumberEl.textContent = orderNumber;
-    if (orderPlaceEl) orderPlaceEl.textContent = orderPlace;
-    if (orderUserEl) orderUserEl.textContent = orderUser;
-    if (orderPartnerEl) orderPartnerEl.textContent = orderPartner;
-    
-    // 添加关闭按钮事件
-    const closeButton = notificationWrapper.querySelector('#yligood-close-notification');
-    if (closeButton) {
-      closeButton.addEventListener('click', () => {
-        document.body.removeChild(notificationWrapper);
-        console.log('通知已被关闭');
-      });
-    }
-    
-    // 自动关闭（30秒后）
-    setTimeout(() => {
-      if (document.body.contains(notificationWrapper)) {
-        document.body.removeChild(notificationWrapper);
-        console.log('通知已自动关闭');
-      }
-    }, 30000);
-  } catch (error) {
-    console.error('显示预约成功提示时发生错误:', error);
-  }
+
+  console.log('显示预约成功提示');
+  checkOrderAndShowNotification();
 }
