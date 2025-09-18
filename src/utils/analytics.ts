@@ -14,3 +14,23 @@ export function insertGoogleTag(): void {
   `;
   document.head.appendChild(script2);
 }
+
+export function trackEvent(eventName: string, eventParams: Record<string, any>): void {
+  if ((window as any).gtag) {
+    (window as any).gtag('event', eventName, eventParams);
+  } else {
+    console.warn('gtag is not defined');
+  }
+}
+
+export function track_gym_success(gymName: string): void {
+  trackEvent('gym_success', { type: gymName });
+}
+
+export function track_auto_click(action: string): void {
+  trackEvent('auto_click', { action });
+}
+
+export function track_auto_scan(intervalSeconds: number): void {
+  trackEvent('auto_scan', { interval_seconds: intervalSeconds });
+}

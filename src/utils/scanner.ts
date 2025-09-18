@@ -1,7 +1,7 @@
 import { useReservationStore } from '@/stores/reservation';
 import { useUIStore } from '@/stores/ui';
 import { getTable, getArrowBtns, getAgreementCheckbox, getAppointmentButton, getCompanionCheckboxList, getSubmitAppointmentButton, getOrderNumber, getOrderPlace, getOrderUser, getOrderPartner, getActionButtons } from '@/utils/dom';
-
+import * as analytics from '../utils/analytics'
 let autoScanIntervalId: number | null = null;
 
 // 开始自动扫描
@@ -137,7 +137,7 @@ export function handleReservationBlockClick(event: MouseEvent): void {
 
   if (reservationBlock) {
     console.log('检测到空闲预约区块被点击，自动处理预约流程');
-
+    analytics.track_auto_click('reserveBlock_click');
     setTimeout(confirmAppointment, 200);
   }
 }
@@ -195,6 +195,7 @@ export function checkOrderAndShowNotification(): void {
     orderUser,
     orderPartner
   });
+  analytics.track_gym_success(getOrderPlace() || '未知场地');
 }
 
 // 解析表格，收集空闲时间段

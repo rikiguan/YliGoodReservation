@@ -65,7 +65,7 @@ import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import { useReservationStore } from '@/stores/reservation';
 import { useUIStore } from '@/stores/ui';
 import { handleReservationBlockClick, scanAllPages, startAutoScan, stopAutoScan } from '@/utils/scanner';
-
+import * as analytics from '@/utils/analytics';
 const valueBtn = ref('自动点击')
 const optionsBtn = ['关闭', '自动点击', '自动扫描']
 
@@ -75,6 +75,7 @@ const openAutoScanTab = ref(false);
 function handleAutoScan() {
   if (reservationStore.autoScanActive) {
     startAutoScan(scanInterval.value)
+    analytics.track_auto_scan(scanInterval.value); 
   } else {
     stopAutoScan()
   }

@@ -1,6 +1,6 @@
 <template>
   <el-card class="success-notification">
-    <el-watermark :content="['YliGood预约助手', '点个Satr吧~']" :gap="[100, 0]">
+    <!-- <el-watermark :content="['YliGood预约助手', '点个Satr吧~']" :gap="[100, 0]"> -->
       <template #header>
         <div class="notification-header">预约成功</div>
       </template>
@@ -32,7 +32,7 @@
       <el-button type="primary" @click="hideNotification" class="close-btn">
         关闭提示
       </el-button>
-    </el-watermark>
+    <!-- </el-watermark> -->
   </el-card>
 </template>
 
