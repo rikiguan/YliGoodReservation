@@ -124,7 +124,7 @@ export function nextStepAppointment(list: Element[]): void {
 
   (randomElement as HTMLElement).click(); // 点击随机选择的预约块
   stopAutoScan(); // 停止自动扫描 二次确认
-  setTimeout(confirmAppointment, 10);
+  setTimeout(confirmAppointment, 200);
 }
 
 /**
@@ -138,7 +138,7 @@ export function handleReservationBlockClick(event: MouseEvent): void {
   if (reservationBlock) {
     console.log('检测到空闲预约区块被点击，自动处理预约流程');
 
-    confirmAppointment();
+    setTimeout(confirmAppointment, 200);
   }
 }
 
