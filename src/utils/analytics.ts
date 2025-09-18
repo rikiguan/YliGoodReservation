@@ -1,3 +1,5 @@
+import { unsafeWindow } from "$";
+
 // <!-- Google tag (gtag.js) -->
 export function insertGoogleTag(): void {
   const script1 = document.createElement('script');
@@ -16,8 +18,8 @@ export function insertGoogleTag(): void {
 }
 
 export function trackEvent(eventName: string, eventParams: Record<string, any>): void {
-  if ((window as any).gtag) {
-    (window as any).gtag('event', eventName, eventParams);
+  if ((unsafeWindow as any).gtag) {
+    (unsafeWindow as any).gtag('event', eventName, eventParams);
   } else {
     console.warn('gtag is not defined');
   }

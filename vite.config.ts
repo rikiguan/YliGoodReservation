@@ -16,7 +16,11 @@ export default defineConfig({
         name: 'YliGoodReservation',
         description: 'help u get a place 2 play',
         author: 'riki',
-        version: '0.2.0',
+        version: '0.2.1',
+        // grant: ['unsafeWindow'],
+        homepage: 'https://github.com/rikiguan/YliGoodReservation',
+        updateURL: 'https://github.com/rikiguan/YliGoodReservation/releases/latest/download/YliGoodReservation.user.js',
+        downloadURL: 'https://github.com/rikiguan/YliGoodReservation/releases/latest/download/YliGoodReservation.user.js'
       }
       // ,
       // build: {
