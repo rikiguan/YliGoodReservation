@@ -7,11 +7,11 @@
 <table>
    <tr>
       <td align="center">
-         <img src="./asserts/output1.gif" alt="一键预约演示" width="500"/><br/>
+         <img src="./asserts/output1.gif" alt="一键预约演示" width="300"/><br/>
          <b>一键预约演示</b>
       </td>
       <td align="center">
-         <img src="./asserts/output2.gif" alt="自动扫描演示" width="500"/><br/>
+         <img src="./asserts/output2.gif" alt="自动扫描演示" width="300"/><br/>
          <b>自动扫描演示</b>
       </td>
    </tr>
