@@ -1,17 +1,17 @@
-![YliGood Reservation](./asserts/title.png)
+<img src="./asserts/title.png" width="100%"/>
 
 # YliGood Reservation
 
 一个自动化工具，帮助用户轻松预约南京大学体育馆预约系统（ggtypt.nju.edu.cn）上的体育场馆。
 
-<table>
+<table width="100%" align="center">
    <tr>
       <td align="center">
-         <img src="./asserts/output1.gif" alt="一键预约演示" width="300"/><br/>
+         <img src="./asserts/output1.gif" alt="一键预约演示" width="100%"/><br/>
          <b>一键预约演示</b>
       </td>
       <td align="center">
-         <img src="./asserts/output2.gif" alt="自动扫描演示" width="300"/><br/>
+         <img src="./asserts/output2.gif" alt="自动扫描演示" width="100%"/><br/>
          <b>自动扫描演示</b>
       </td>
    </tr>
@@ -20,8 +20,8 @@
 ## ✨ 功能特色
 
 - **自动扫描**：自动检测指定时间段内可预约场馆并进行预约。（如果需要八点钟抢场，请关闭预约尚未开始对话框，切换预约日期为前一天，然后开启自动扫描功能）
-- **自动点击**：一键完成预约流程
-- **验证码自动识别**：自动识别并解决滑块验证码，无需人工干预（采取模拟点击方式，在识别过程中不要移动鼠标）
+- **一键预约**：一键完成预约流程
+- **自动识别**：自动识别并解决滑块验证码，无需人工干预（采取模拟点击方式，在识别过程中不要移动鼠标）
 
 ## 🚀 安装指南
 
