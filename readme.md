@@ -30,7 +30,7 @@
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展
 2. 点击[这里](https://github.com/rikiguan/YliGoodReservation/releases/)安装用户脚本
-3. 访问 [南京大学体育馆预约系统](https://ggtypt.nju.edu.cn/) 即可自动启用工具
+3. 访问 [南京大学体育馆预约系统](https://ggtypt.nju.edu.cn/venue/venue-introduce) 即可自动启用工具。（ps. https://ggtypt.nju.edu.cn/venue/venue-introduce 必须加后面的地址，要不然会404）
 
 ### 方式二：浏览器扩展
 
