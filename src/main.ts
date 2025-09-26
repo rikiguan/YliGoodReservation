@@ -5,7 +5,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 导入 Element Plus 的样式
 import 'element-plus/dist/index.css'
 import App from './App.vue'
-import { insertGoogleTag } from './utils/analytics'
+import * as analytics from '@/utils/analytics';
 
 // 创建应用
 const app = createApp(App)
@@ -29,5 +29,6 @@ document.body.appendChild(mountPoint)
 // 挂载应用
 app.mount(mountPoint)
 
-insertGoogleTag();
+analytics.insertGoogleTag();
+analytics.report_version(__APP_VERSION__ || 'unknown');
 console.log('YliGood Reservation 初始化完成')

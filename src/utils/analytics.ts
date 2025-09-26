@@ -36,3 +36,7 @@ export function track_auto_click(action: string): void {
 export function track_auto_scan(intervalSeconds: number): void {
   trackEvent('auto_scan', { interval_seconds: intervalSeconds });
 }
+
+export function report_version(version: string): void {
+  trackEvent('report_version', { version });
+}

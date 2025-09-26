@@ -2,7 +2,7 @@
  * Mouse movement simulation for CAPTCHA solving
  */
 import { updateSolverStatus } from './indicator';
-
+import { unsafeWindow } from "$";
 // Simulate human-like slider movement with delays
 export function simulateHumanLikeSliderMovement(position: number): void {
   try {
@@ -48,7 +48,7 @@ export function simulateSliderEvents(sliderElement: HTMLElement, targetPosition:
   const mouseDownEvent = new MouseEvent('mousedown', {
     bubbles: true,
     cancelable: true,
-    view: window,
+    view: unsafeWindow,
     clientX: startX,
     clientY: startY
   });
@@ -77,7 +77,7 @@ export function simulateSliderEvents(sliderElement: HTMLElement, targetPosition:
         const mouseMoveEvent = new MouseEvent('mousemove', {
           bubbles: true,
           cancelable: true,
-          view: window,
+          view: unsafeWindow,
           clientX: currentX,
           clientY: startY
         });
@@ -94,7 +94,7 @@ export function simulateSliderEvents(sliderElement: HTMLElement, targetPosition:
           const mouseUpEvent = new MouseEvent('mouseup', {
             bubbles: true,
             cancelable: true,
-            view: window,
+            view: unsafeWindow,
             clientX: endX-10,
             clientY: startY
           });
