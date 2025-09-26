@@ -28,8 +28,8 @@
 
 ### 方式一：脚本管理器
 
-1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展
-2. 点击[这里](https://github.com/rikiguan/YliGoodReservation/releases/)安装用户脚本
+1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展（可以在应用商店搜索Tampermonkey安装  [Edge应用商店](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home?hl=zh-cn)、 [Chrome应用商店](https://chromewebstore.google.com/category/extensions?hl=zh-cn)）
+2. 点击[这里](https://github.com/rikiguan/YliGoodReservation/releases/)安装用户脚本（点击后一般会自动跳转到Tampermonkey界面安装；或者将下载的脚本文件拖拽到Tampermonkey*管理面板*；如果还不行，请点击Tampermonkey，选择*添加新脚本*，手动复制粘贴脚本内容）
 3. 访问 [南京大学体育馆预约系统](https://ggtypt.nju.edu.cn/venue/venue-introduce) 即可自动启用工具。（ps. https://ggtypt.nju.edu.cn/venue/venue-introduce 必须加后面的地址，要不然会404）
 
 ### 方式二：浏览器扩展
