@@ -1,3 +1,5 @@
+2026体育场馆升级，暂未适配
+
 <img src="./asserts/title.png" width="100%"/>
 
 # YliGood Reservation
